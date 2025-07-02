@@ -1,0 +1,11 @@
+Task 5: What are the operations on data structures?
+
+Common operations on data structures include:
+1. Insertion: Adding new elements.
+2. Deletion: Removing elements.
+3. Traversal: Accessing each element (e.g., for display).
+4. Searching: Finding an element.
+5. Sorting: Arranging elements in a specific order.
+6. Updating: Modifying an element's value.
+
+These operations vary in complexity and efficiency depending on the data structure used.

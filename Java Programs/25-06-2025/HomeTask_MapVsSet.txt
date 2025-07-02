@@ -1,0 +1,6 @@
+Map vs Set (Home Task)
+======================
+
+- Map: Stores key-value pairs. Keys are unique. Example: HashMap, TreeMap.
+- Set: Stores unique values only, no duplicates. Example: HashSet, TreeSet.
+- Map allows value lookup by key; Set does not.

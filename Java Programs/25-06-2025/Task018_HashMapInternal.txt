@@ -1,0 +1,24 @@
+HashMap Internal Working (with Diagram)
+========================================
+
+A HashMap in Java stores key-value pairs using a hash table. Internally, it uses an array of buckets, where each bucket is a linked list (or a tree for high-collision buckets in Java 8+). The key's hashCode() determines the bucket index. If multiple keys hash to the same bucket (collision), they are stored in the list/tree at that bucket.
+
+Diagram:
+
+[HashMap Structure]
+
+Index:   0    1    2    3    4    5    6    7
+        ---------------------------------------
+        |    |    |    |    |    |    |    |   
+        v    v    v    v    v    v    v    v
+      null  [A]  null [B] [C]  null null null
+             |         |   |
+           null      null null
+
+- Each bucket can have a linked list/tree of entries.
+- When a key is added, its hashCode is used to find the bucket.
+- If the bucket is empty, the entry is added.
+- If not, the list/tree is traversed to check for duplicates or add at the end.
+- On get(), the hashCode is used to find the bucket, then the list/tree is searched for the key.
+
+This structure allows O(1) average time for put/get, but can degrade to O(n) if many collisions occur.

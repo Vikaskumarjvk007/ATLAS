@@ -1,0 +1,6 @@
+Task 4: What do you understand by data structures?
+
+Data structures are specialized formats for organizing, processing, and storing data efficiently.
+They define the relationship between data and the operations that can be performed on them.
+Examples: Arrays, Linked Lists, Stacks, Queues, Trees, Graphs, Hash Tables.
+Data structures help in efficient data access, modification, and management in programs.

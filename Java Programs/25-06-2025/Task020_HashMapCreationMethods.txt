@@ -1,0 +1,16 @@
+Methods to Create a HashMap in Java
+==================================
+
+1. Using the default constructor:
+   HashMap<K, V> map = new HashMap<>();
+
+2. With initial capacity:
+   HashMap<K, V> map = new HashMap<>(int initialCapacity);
+
+3. With initial capacity and load factor:
+   HashMap<K, V> map = new HashMap<>(int initialCapacity, float loadFactor);
+
+4. From another Map:
+   HashMap<K, V> map = new HashMap<>(Map<? extends K, ? extends V> m);
+
+So, there are 4 main ways to create a HashMap in Java.

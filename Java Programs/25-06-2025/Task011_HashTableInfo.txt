@@ -1,0 +1,7 @@
+Task 11: What do you know about hash table?
+
+A hash table is a data structure that stores key-value pairs.
+It uses a hash function to compute an index into an array of buckets or slots, from which the desired value can be found.
+Hash tables provide fast insertion, deletion, and lookup operations.
+They handle collisions using techniques like chaining or open addressing.
+In Java, Hashtable and HashMap are common implementations.

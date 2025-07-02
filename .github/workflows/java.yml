@@ -1,0 +1,28 @@
+# Simple workflow to compile Java files for my assignments
+# (I wrote this myself as a beginner for my own learning)
+
+name: Java Compile Check
+
+on:
+  push:
+    paths:
+      - 'Java Programs/**/*.java'
+  pull_request:
+    paths:
+      - 'Java Programs/**/*.java'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Set up Java (JDK 21)
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+      - name: Compile all Java files
+        run: |
+          find 'Java Programs' -name "*.java" > sources.txt
+          javac @sources.txt

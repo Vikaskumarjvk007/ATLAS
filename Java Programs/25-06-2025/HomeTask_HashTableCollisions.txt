@@ -1,0 +1,6 @@
+Hash Table Collisions (Home Task)
+=================================
+
+- Collision: When two keys hash to the same bucket.
+- Handled by chaining (linked list/tree) or open addressing (probing).
+- Good hash functions and resizing reduce collisions.

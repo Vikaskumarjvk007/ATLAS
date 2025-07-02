@@ -1,0 +1,6 @@
+Task 10: What is the above code snippet doing?
+
+The code merges two sorted integer arrays (arr1 and arr2) into a single sorted array (merge).
+It prints both input arrays, then iterates through both, comparing elements and adding the smaller one to the merged array.
+After one array is exhausted, it copies the remaining elements from the other array.
+Finally, it prints the merged, sorted array.

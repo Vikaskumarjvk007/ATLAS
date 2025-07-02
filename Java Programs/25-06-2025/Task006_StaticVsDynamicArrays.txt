@@ -1,0 +1,8 @@
+Task 6: Static vs Dynamic Arrays (Summary Table)
+
+Feature		Static Array			Dynamic Array
+Size		Fixed at creation		Can grow/shrink at runtime
+Performance	Fast access, no resizing	Slightly slower (resize cost)
+Memory		Contiguous, pre-allocated	May allocate new memory
+Flexibility	Less flexible			More flexible
+Example		int[] arr = new int[10];	ArrayList<Integer> list;

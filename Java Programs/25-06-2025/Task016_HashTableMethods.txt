@@ -1,0 +1,15 @@
+Task 16: Methods of Hash table
+
+- put(K key, V value)
+- get(Object key)
+- remove(Object key)
+- containsKey(Object key)
+- containsValue(Object value)
+- isEmpty()
+- size()
+- clear()
+- keySet()
+- values()
+- entrySet()
+- rehash() (protected)
+- clone()

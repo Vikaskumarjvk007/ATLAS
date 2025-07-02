@@ -1,0 +1,33 @@
+{
+	"folders": [
+		{
+			"path": "../.."
+		},
+		{
+			"name": "ATLAS-SDE-VILT",
+			"path": "../../../GITHUB/ATLAS-SDE-VILT"
+		}
+	],
+	"settings": {
+		"java.project.sourcePaths": [
+			"src",
+			"JavaPrograms/25-06-2025"
+		],
+		"java.project.outputPath": "bin",
+		"java.project.referencedLibraries": [
+			"lib/**/*.jar"
+		],
+		"java.import.generatesMetadataFilesAtProjectRoot": false,
+		"java.errors.incompleteClasspath.severity": "warning",
+		"errorLens.enabled": true,
+		"errorLens.fontWeight": "bold",
+		"workbench.editor.enablePreview": false,
+		"workbench.editor.pinnedTabSizing": "shrink",
+		"workbench.colorTheme": "2077",
+		"workbench.iconTheme": "vs-seti",
+		"workbench.statusBar.visible": true,
+		"workbench.sideBar.location": "left",
+		"breadcrumbs.enabled": true,
+		"terminal.integrated.environmentChangesIndicator": "off"
+	}
+}

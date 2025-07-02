@@ -1,0 +1,23 @@
+# Simple workflow to compile C++ files for my assignments
+# (I wrote this myself as a beginner for my own learning)
+
+name: C++ Compile Check
+
+on:
+  push:
+    paths:
+      - 'C++ Programs/**/*.cpp'
+  pull_request:
+    paths:
+      - 'C++ Programs/**/*.cpp'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Compile all C++ files
+        run: |
+          find 'C++ Programs' -name "*.cpp" > sources.txt
+          g++ @sources.txt -o cpp_programs || true

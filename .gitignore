@@ -1,0 +1,27 @@
+# Compiled and OS files
+*.class
+*.exe
+*.o
+*.out
+*.dll
+*.so
+*.bin
+
+# Java
+*.jar
+*.war
+*.ear
+
+# VS Code
+.vscode/
+
+# System
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Others
+node_modules/
+.env

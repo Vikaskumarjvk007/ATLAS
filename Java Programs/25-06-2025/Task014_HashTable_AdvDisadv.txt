@@ -1,0 +1,15 @@
+Task 14: Hash table advantages and disadvantages
+
+Advantages:
+- Fast data access (O(1) average time for search, insert, delete)
+- Efficient for large datasets
+- Simple implementation for key-value pairs
+- Useful for implementing caches, symbol tables, etc.
+
+Disadvantages:
+- Performance degrades with many collisions
+- Fixed size (unless rehashed)
+- Not ordered
+- Hash functions can be tricky to design
+- Uses more memory than some alternatives
+- In Java, Hashtable is synchronized (slower than HashMap)

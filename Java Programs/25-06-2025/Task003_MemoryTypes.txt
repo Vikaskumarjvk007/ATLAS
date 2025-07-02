@@ -1,0 +1,22 @@
+Task 3: Types of Computer Memory with Examples
+
+1. Primary Memory (Main Memory)
+   - RAM (Random Access Memory): Volatile, fast, used for temporary storage while programs run. Example: DDR4 RAM in laptops.
+   - ROM (Read Only Memory): Non-volatile, stores firmware. Example: BIOS chip.
+
+2. Secondary Memory
+   - Hard Disk Drive (HDD): Non-volatile, large capacity, slower. Example: 1TB HDD.
+   - Solid State Drive (SSD): Non-volatile, faster than HDD. Example: 512GB SSD.
+   - Optical Disks: CDs, DVDs for backup/storage.
+
+3. Cache Memory
+   - Small, very fast memory between CPU and RAM. Example: L1, L2, L3 cache in processors.
+
+4. Registers
+   - Smallest, fastest memory inside CPU for immediate data processing.
+
+5. Flash Memory
+   - Used in USB drives, SD cards, SSDs.
+
+6. Virtual Memory
+   - Uses part of secondary storage as extra RAM.

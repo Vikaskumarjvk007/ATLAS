@@ -1,0 +1,7 @@
+Task 15: Linear probing in Hash table (skeleton, see full code in prompt)
+
+Linear probing is a collision resolution technique in open addressing hash tables.
+If a collision occurs, the algorithm checks the next slot (index + 1) until an empty slot is found.
+This reduces the need for linked lists but can cause clustering.
+
+Example: See LinearProbingHashTable class in your prompt for full implementation.

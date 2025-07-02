@@ -1,0 +1,1 @@
+The command `chown -c master file1.txt` will change the owner of `file1.txt` to the user "master" and print a line indicating the change.D

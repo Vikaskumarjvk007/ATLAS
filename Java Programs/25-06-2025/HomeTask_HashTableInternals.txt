@@ -1,0 +1,8 @@
+Hash Table Internals (Home Task)
+===============================
+
+- Hash table uses an array of buckets to store key-value pairs.
+- Each key's hashCode() determines the bucket index.
+- Collisions are handled by chaining (linked list/tree) or open addressing.
+- Rehashing occurs when load factor exceeds threshold.
+- Provides O(1) average time for put/get operations.
