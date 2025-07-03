@@ -6,6 +6,6 @@
 A personal collection of learning resources, code, and daily progress. This repo includes:
 
 - **Linux**: Practice scripts and exercises
-- **Java Programs**: Assignments, data structures, and OOP code
+- **Java Programs**: OOPS, DSA and coding
 - **C++ Programs**: Data structures and algorithms
 - **Day-Wise Docs**: Daily logs and documentation
