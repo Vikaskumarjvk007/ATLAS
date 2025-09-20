@@ -1,0 +1,207 @@
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.PriorityQueue;
+import java.util.Scanner;
+import java.util.Set;
+
+public class Day36_DijkstraAlgorithm {
+
+    static class Edge {
+        int destination;
+        int weight;
+
+        Edge(int destination, int weight) {
+            this.destination = destination;
+            this.weight = weight;
+        }
+    }
+
+    static class Node implements Comparable<Node> {
+        int vertex;
+        int distance;
+
+        Node(int vertex, int distance) {
+            this.vertex = vertex;
+            this.distance = distance;
+        }
+
+        @Override
+        public int compareTo(Node other) {
+            return Integer.compare(this.distance, other.distance);
+        }
+    }
+
+    private Map<Integer, List<Edge>> graph;
+
+    public Day36_DijkstraAlgorithm() {
+        graph = new HashMap<>();
+    }
+
+    public void addVertex(int vertex) {
+        graph.putIfAbsent(vertex, new ArrayList<>());
+    }
+
+    public void addEdge(int source, int destination, int weight) {
+        graph.putIfAbsent(source, new ArrayList<>());
+        graph.putIfAbsent(destination, new ArrayList<>());
+
+        graph.get(source).add(new Edge(destination, weight));
+    }
+
+    public Map<Integer, Integer> dijkstra(int source) {
+        Map<Integer, Integer> distances = new HashMap<>();
+        Set<Integer> visited = new HashSet<>();
+        PriorityQueue<Node> pq = new PriorityQueue<>();
+
+        for (int vertex : graph.keySet()) {
+            distances.put(vertex, Integer.MAX_VALUE);
+        }
+        distances.put(source, 0);
+
+        pq.offer(new Node(source, 0));
+
+        while (!pq.isEmpty()) {
+            Node current = pq.poll();
+
+            if (visited.contains(current.vertex)) {
+                continue;
+            }
+
+            visited.add(current.vertex);
+
+            List<Edge> neighbors = graph.get(current.vertex);
+            if (neighbors != null) {
+                for (Edge edge : neighbors) {
+                    if (!visited.contains(edge.destination)) {
+                        int newDistance = distances.get(current.vertex) + edge.weight;
+
+                        if (newDistance < distances.get(edge.destination)) {
+                            distances.put(edge.destination, newDistance);
+                            pq.offer(new Node(edge.destination, newDistance));
+                        }
+                    }
+                }
+            }
+        }
+
+        return distances;
+    }
+
+    public List<Integer> getShortestPath(int source, int destination) {
+        Map<Integer, Integer> distances = new HashMap<>();
+        Map<Integer, Integer> previous = new HashMap<>();
+        Set<Integer> visited = new HashSet<>();
+        PriorityQueue<Node> pq = new PriorityQueue<>();
+
+        for (int vertex : graph.keySet()) {
+            distances.put(vertex, Integer.MAX_VALUE);
+            previous.put(vertex, null);
+        }
+        distances.put(source, 0);
+
+        pq.offer(new Node(source, 0));
+
+        while (!pq.isEmpty()) {
+            Node current = pq.poll();
+
+            if (current.vertex == destination) {
+                break;
+            }
+
+            if (visited.contains(current.vertex)) {
+                continue;
+            }
+
+            visited.add(current.vertex);
+
+            List<Edge> neighbors = graph.get(current.vertex);
+            if (neighbors != null) {
+                for (Edge edge : neighbors) {
+                    if (!visited.contains(edge.destination)) {
+                        int newDistance = distances.get(current.vertex) + edge.weight;
+
+                        if (newDistance < distances.get(edge.destination)) {
+                            distances.put(edge.destination, newDistance);
+                            previous.put(edge.destination, current.vertex);
+                            pq.offer(new Node(edge.destination, newDistance));
+                        }
+                    }
+                }
+            }
+        }
+
+        List<Integer> path = new ArrayList<>();
+        Integer current = destination;
+
+        while (current != null) {
+            path.add(current);
+            current = previous.get(current);
+        }
+
+        Collections.reverse(path);
+        return path.get(0) == source ? path : new ArrayList<>();
+    }
+
+    public void displayGraph() {
+        System.out.println("Graph representation:");
+        for (Map.Entry<Integer, List<Edge>> entry : graph.entrySet()) {
+            System.out.print(entry.getKey() + " -> ");
+            for (Edge edge : entry.getValue()) {
+                System.out.print("(" + edge.destination + ", " + edge.weight + ") ");
+            }
+            System.out.println();
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        Day36_DijkstraAlgorithm dijkstra = new Day36_DijkstraAlgorithm();
+
+        System.out.print("Enter number of vertices: ");
+        int vertices = scanner.nextInt();
+
+        for (int i = 0; i < vertices; i++) {
+            dijkstra.addVertex(i);
+        }
+
+        System.out.print("Enter number of edges: ");
+        int edges = scanner.nextInt();
+
+        System.out.println("Enter edges (source destination weight):");
+        for (int i = 0; i < edges; i++) {
+            int source = scanner.nextInt();
+            int destination = scanner.nextInt();
+            int weight = scanner.nextInt();
+            dijkstra.addEdge(source, destination, weight);
+        }
+
+        dijkstra.displayGraph();
+
+        System.out.print("Enter source vertex: ");
+        int source = scanner.nextInt();
+
+        Map<Integer, Integer> distances = dijkstra.dijkstra(source);
+        System.out.println("\nShortest distances from vertex " + source + ":");
+        for (Map.Entry<Integer, Integer> entry : distances.entrySet()) {
+            int distance = entry.getValue() == Integer.MAX_VALUE ? -1 : entry.getValue();
+            System.out.println("To vertex " + entry.getKey() + ": " + distance);
+        }
+
+        System.out.print("Enter destination for shortest path: ");
+        int destination = scanner.nextInt();
+
+        List<Integer> path = dijkstra.getShortestPath(source, destination);
+        if (!path.isEmpty()) {
+            System.out.println("Shortest path from " + source + " to " + destination + ": " + path);
+            System.out.println("Path distance: " + distances.get(destination));
+        } else {
+            System.out.println("No path exists from " + source + " to " + destination);
+        }
+
+        scanner.close();
+    }
+}

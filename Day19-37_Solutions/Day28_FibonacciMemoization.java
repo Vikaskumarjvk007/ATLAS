@@ -1,0 +1,101 @@
+import java.util.Scanner;
+
+public class Day28_FibonacciMemoization {
+
+    private static long[] memo;
+
+    public static long fibonacciMemo(int n) {
+        if (memo == null) {
+            memo = new long[n + 1];
+            for (int i = 0; i <= n; i++) {
+                memo[i] = -1;
+            }
+        }
+
+        if (n <= 1) {
+            return n;
+        }
+
+        if (memo[n] != -1) {
+            return memo[n];
+        }
+
+        memo[n] = fibonacciMemo(n - 1) + fibonacciMemo(n - 2);
+        return memo[n];
+    }
+
+    public static long fibonacciBottomUp(int n) {
+        if (n <= 1) {
+            return n;
+        }
+
+        long[] dp = new long[n + 1];
+        dp[0] = 0;
+        dp[1] = 1;
+
+        for (int i = 2; i <= n; i++) {
+            dp[i] = dp[i - 1] + dp[i - 2];
+        }
+
+        return dp[n];
+    }
+
+    public static long fibonacciOptimized(int n) {
+        if (n <= 1) {
+            return n;
+        }
+
+        long prev2 = 0;
+        long prev1 = 1;
+        long current = 0;
+
+        for (int i = 2; i <= n; i++) {
+            current = prev1 + prev2;
+            prev2 = prev1;
+            prev1 = current;
+        }
+
+        return current;
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter a number to find its Fibonacci value: ");
+        int n = scanner.nextInt();
+
+        if (n < 0) {
+            System.out.println("Please enter a non-negative number.");
+            scanner.close();
+            return;
+        }
+
+        System.out.println("Computing Fibonacci of " + n + "...\n");
+
+        long startTime = System.nanoTime();
+        long result1 = fibonacciMemo(n);
+        long endTime = System.nanoTime();
+        System.out.println("Memoization approach: " + result1);
+        System.out.println("Time taken: " + (endTime - startTime) / 1000000.0 + " ms\n");
+
+        startTime = System.nanoTime();
+        long result2 = fibonacciBottomUp(n);
+        endTime = System.nanoTime();
+        System.out.println("Bottom-up approach: " + result2);
+        System.out.println("Time taken: " + (endTime - startTime) / 1000000.0 + " ms\n");
+
+        startTime = System.nanoTime();
+        long result3 = fibonacciOptimized(n);
+        endTime = System.nanoTime();
+        System.out.println("Optimized approach: " + result3);
+        System.out.println("Time taken: " + (endTime - startTime) / 1000000.0 + " ms\n");
+
+        System.out.println("First " + Math.min(n + 1, 15) + " Fibonacci numbers:");
+        for (int i = 0; i <= Math.min(n, 14); i++) {
+            System.out.print(fibonacciOptimized(i) + " ");
+        }
+        System.out.println();
+
+        scanner.close();
+    }
+}

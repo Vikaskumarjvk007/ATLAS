@@ -1,0 +1,180 @@
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
+
+public class Day35_TrieDataStructure {
+
+    static class TrieNode {
+        Map<Character, TrieNode> children;
+        boolean isEndOfWord;
+
+        public TrieNode() {
+            children = new HashMap<>();
+            isEndOfWord = false;
+        }
+    }
+
+    private TrieNode root;
+
+    public Day35_TrieDataStructure() {
+        root = new TrieNode();
+    }
+
+    public void insert(String word) {
+        TrieNode current = root;
+
+        for (char ch : word.toCharArray()) {
+            current.children.putIfAbsent(ch, new TrieNode());
+            current = current.children.get(ch);
+        }
+
+        current.isEndOfWord = true;
+        System.out.println("Inserted: " + word);
+    }
+
+    public boolean search(String word) {
+        TrieNode current = root;
+
+        for (char ch : word.toCharArray()) {
+            if (!current.children.containsKey(ch)) {
+                return false;
+            }
+            current = current.children.get(ch);
+        }
+
+        return current.isEndOfWord;
+    }
+
+    public boolean startsWith(String prefix) {
+        TrieNode current = root;
+
+        for (char ch : prefix.toCharArray()) {
+            if (!current.children.containsKey(ch)) {
+                return false;
+            }
+            current = current.children.get(ch);
+        }
+
+        return true;
+    }
+
+    public void delete(String word) {
+        delete(root, word, 0);
+    }
+
+    private boolean delete(TrieNode current, String word, int index) {
+        if (index == word.length()) {
+            if (!current.isEndOfWord) {
+                return false;
+            }
+            current.isEndOfWord = false;
+            return current.children.isEmpty();
+        }
+
+        char ch = word.charAt(index);
+        TrieNode node = current.children.get(ch);
+
+        if (node == null) {
+            return false;
+        }
+
+        boolean shouldDeleteChild = delete(node, word, index + 1);
+
+        if (shouldDeleteChild) {
+            current.children.remove(ch);
+            return !current.isEndOfWord && current.children.isEmpty();
+        }
+
+        return false;
+    }
+
+    public List<String> getAllWordsWithPrefix(String prefix) {
+        List<String> result = new ArrayList<>();
+        TrieNode current = root;
+
+        for (char ch : prefix.toCharArray()) {
+            if (!current.children.containsKey(ch)) {
+                return result;
+            }
+            current = current.children.get(ch);
+        }
+
+        dfs(current, prefix, result);
+        return result;
+    }
+
+    private void dfs(TrieNode node, String currentWord, List<String> result) {
+        if (node.isEndOfWord) {
+            result.add(currentWord);
+        }
+
+        for (Map.Entry<Character, TrieNode> entry : node.children.entrySet()) {
+            dfs(entry.getValue(), currentWord + entry.getKey(), result);
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        Day35_TrieDataStructure trie = new Day35_TrieDataStructure();
+
+        while (true) {
+            System.out.println("\n--- Trie Operations ---");
+            System.out.println("1. Insert word");
+            System.out.println("2. Search word");
+            System.out.println("3. Check prefix");
+            System.out.println("4. Delete word");
+            System.out.println("5. Get all words with prefix");
+            System.out.println("6. Exit");
+            System.out.print("Choose an option: ");
+
+            int choice = scanner.nextInt();
+            scanner.nextLine();
+
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter word to insert: ");
+                    String insertWord = scanner.nextLine();
+                    trie.insert(insertWord);
+                    break;
+
+                case 2:
+                    System.out.print("Enter word to search: ");
+                    String searchWord = scanner.nextLine();
+                    boolean found = trie.search(searchWord);
+                    System.out.println("Word '" + searchWord + "' " + (found ? "found" : "not found"));
+                    break;
+
+                case 3:
+                    System.out.print("Enter prefix to check: ");
+                    String prefix = scanner.nextLine();
+                    boolean hasPrefix = trie.startsWith(prefix);
+                    System.out.println("Prefix '" + prefix + "' " + (hasPrefix ? "exists" : "does not exist"));
+                    break;
+
+                case 4:
+                    System.out.print("Enter word to delete: ");
+                    String deleteWord = scanner.nextLine();
+                    trie.delete(deleteWord);
+                    System.out.println("Attempted to delete: " + deleteWord);
+                    break;
+
+                case 5:
+                    System.out.print("Enter prefix: ");
+                    String searchPrefix = scanner.nextLine();
+                    List<String> words = trie.getAllWordsWithPrefix(searchPrefix);
+                    System.out.println("Words with prefix '" + searchPrefix + "': " + words);
+                    break;
+
+                case 6:
+                    System.out.println("Exiting...");
+                    scanner.close();
+                    return;
+
+                default:
+                    System.out.println("Invalid choice! Please try again.");
+            }
+        }
+    }
+}
